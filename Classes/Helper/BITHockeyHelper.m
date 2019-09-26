@@ -205,7 +205,7 @@ NSString *bit_keychainServiceName(void) {
     // default bundle id
     NSString *bundleId = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"];
     
-    
+    // check for override
     BITHockeyManager *manager = [BITHockeyManager sharedHockeyManager];
     if (manager && manager.keychainServiceBundleId && manager.keychainServiceBundleId.length > 0) {
         bundleId = manager.keychainServiceBundleId;
