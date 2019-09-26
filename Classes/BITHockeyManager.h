@@ -293,6 +293,13 @@
 - (void)setUserEmail:(NSString *)userEmail;
 
 
+/** overrides the service name for the keychain items.
+ 
+ By default HockeySDK will use the [NSBundle mainBundle]'s id as the servicename
+ 
+ */
+@property (nonatomic) NSString *keychainServiceBundleId;
+
 ///-----------------------------------------------------------------------------
 /// @name Debug Logging
 ///-----------------------------------------------------------------------------
