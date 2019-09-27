@@ -23,8 +23,6 @@ NSString *const kBITHockeySDKURL = @"https://sdk.hockeyapp.net/";
 @property (nonatomic, strong, readwrite) BITFeedbackManager *feedbackManager;
 @property (nonatomic, strong, readwrite) BITMetricsManager *metricsManager;
 
-//@property (nonatomic, copy) NSString *keychainServiceBundleId;
-
 @end
 
 
