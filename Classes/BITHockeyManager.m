@@ -27,6 +27,7 @@ NSString *const kBITHockeySDKURL = @"https://sdk.hockeyapp.net/";
 
 
 @implementation BITHockeyManager
+@synthesize keychainServiceBundleId = _keychainServiceBundleId;
 
 #pragma mark - Public Class Methods
 
@@ -52,6 +53,7 @@ NSString *const kBITHockeySDKURL = @"https://sdk.hockeyapp.net/";
     _disableFeedbackManager = NO;
     _disableMetricsManager = NO;
     
+    _keychainServiceBundleId = nil;
     self.startManagerIsInvoked = NO;
     
     [self performSelector:@selector(validateStartManagerIsInvoked) withObject:nil afterDelay:0.0];

@@ -32,6 +32,7 @@ NSString *bit_deviceLanguage(void);
 NSString *bit_screenSize(void);
 NSString *bit_sdkVersion(void);
 NSString *bit_appVersion(void);
+NSString *bit_keychainServiceName(void);
 
 /* Fix bug where Application Support was excluded from backup. */
 void bit_fixBackupAttributeForURL(NSURL *directoryURL);

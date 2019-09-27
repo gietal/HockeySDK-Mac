@@ -201,11 +201,27 @@ NSString *bit_settingsDir(void) {
 
 #pragma mark - Keychain
 
+NSString *bit_keychainServiceName(void) {
+    // default bundle id
+    NSString *bundleId = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"];
+    
+    // check for override
+    BITHockeyManager *manager = [BITHockeyManager sharedHockeyManager];
+    if (manager && manager.keychainServiceBundleId && manager.keychainServiceBundleId.length > 0) {
+        bundleId = manager.keychainServiceBundleId;
+    }
+    
+    NSString *serviceName = [NSString stringWithFormat:@"%@.HockeySDK", bundleId];
+    
+    return serviceName;
+}
+
 BOOL bit_addStringValueToKeychain(NSString *stringValue, NSString *key) {
   if (!key || !stringValue)
     return NO;
   
-  NSString *serviceName = [NSString stringWithFormat:@"%@.HockeySDK", [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"]];
+    
+  NSString *serviceName = bit_keychainServiceName();
   
   BITGenericKeychainItem *item = [BITGenericKeychainItem genericKeychainItemForService:serviceName withUsername:key];
   
@@ -225,7 +241,7 @@ NSString *bit_stringValueFromKeychainForKey(NSString *key) {
   if (!key)
     return nil;
   
-  NSString *serviceName = [NSString stringWithFormat:@"%@.HockeySDK", [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"]];
+  NSString *serviceName = bit_keychainServiceName();
   
   BITGenericKeychainItem *item = [BITGenericKeychainItem genericKeychainItemForService:serviceName withUsername:key];
   if (item) {
@@ -237,7 +253,7 @@ NSString *bit_stringValueFromKeychainForKey(NSString *key) {
 }
 
 BOOL bit_removeKeyFromKeychain(NSString *key) {
-  NSString *serviceName = [NSString stringWithFormat:@"%@.HockeySDK", [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"]];
+  NSString *serviceName = bit_keychainServiceName();
   
   BITGenericKeychainItem *item = [BITGenericKeychainItem genericKeychainItemForService:serviceName withUsername:key];
   if (item) {
